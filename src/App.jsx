@@ -27,6 +27,7 @@ import CourseDetails from "./Pages/CourseDetails";
 import ViewCourse from "./Pages/ViewCourse";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
 import Instructor from "./Components/Core/Dashboard/InstructorDashboard/Instructor";
+import CategoryCatalog from "./Pages/CategoryCatalog";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -78,6 +79,7 @@ function App() {
           }
         />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/category-catalog" element={<CategoryCatalog />} />
         <Route path="about" element={<About />} />
         <Route
           element={
