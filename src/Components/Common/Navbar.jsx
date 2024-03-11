@@ -70,11 +70,11 @@ const Navbar = () => {
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         <Link to={"/"} className="flex">
           {/* <img src={logo2} alt={"logo"} width={30} height={42} /> */}
-          <PiStudentFill className="text-white size-11" />
+          <PiStudentFill className="text-white  size-9" />
           <img
             src={logo}
             alt={"logo"}
-            width={145}
+            width={135}
             height={30}
             className="mt-1"
           />

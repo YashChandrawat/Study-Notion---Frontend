@@ -54,6 +54,7 @@ function App() {
             </OpenRoute>
           }
         />
+        <Route path="/category-catalog" element={<CategoryCatalog />} />
         <Route
           path="/forgot-password"
           element={
@@ -79,7 +80,6 @@ function App() {
           }
         />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/category-catalog" element={<CategoryCatalog />} />
         <Route path="about" element={<About />} />
         <Route
           element={
