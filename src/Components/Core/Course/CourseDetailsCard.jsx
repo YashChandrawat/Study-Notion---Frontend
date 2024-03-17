@@ -51,85 +51,73 @@ const CourseDetailsCard = ({
   }, []);
 
   const studentEnrolled = course?.courseDetails?.studentsEnrolled;
-  // Ensure course.studentEnrolled is initialized properly
-  console.log(
-    "Log Data : ",
-    course?.courseDetails?.studentsEnrolled.includes(user?._id)
-  );
 
   return (
-    <>
-      <div
-        className={`flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5`}
-      >
-        {/* Course Image */}
-        <img
-          src={course?.courseDetails?.thumbnail}
-          alt={course?.courseDetails?.courseName}
-          className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full"
-        />
+    <div className="flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5">
+      {/* Course Image */}
+      <img
+        src={course?.courseDetails?.thumbnail}
+        alt={course?.courseDetails?.courseName}
+        className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full"
+      />
 
-        <div className="px-4">
-          <div className="space-x-3 pb-4 text-3xl font-semibold">
-            Rs. {course?.courseDetails?.price}
-          </div>
-          <div className="flex flex-col gap-4">
-            <button
-              className="bg-yellow-50 text-black w-fit p-2 rounded-md font-semibold"
-              onClick={
-                user &&
-                course?.courseDetails?.studentsEnrolled.includes(user?._id)
-                  ? () => navigate("/dashboard/enrolled-courses")
-                  : handleBuyCourse
+      <div className="px-4">
+        <div className="space-x-3 pb-4 text-3xl font-semibold">
+          Rs. {course?.courseDetails?.price}
+        </div>
+        <div className="flex flex-col gap-4">
+          <button
+            className="bg-yellow-50 text-black w-fit p-2 rounded-md font-semibold"
+            onClick={() => {
+              if (user && studentEnrolled?.includes(user?._id)) {
+                navigate("/dashboard/enrolled-courses");
+              } else {
+                handleBuyCourse();
               }
-            >
-              {user &&
-              course?.courseDetails?.studentsEnrolled.includes(user?._id)
-                ? "Go To Course"
-                : "Buy Now"}
-            </button>
-            {(!user ||
-              !course?.courseDetails?.studentsEnrolled.includes(user?._id)) && (
+            }}
+          >
+            {user && studentEnrolled?.includes(user?._id)
+              ? "Go To Course"
+              : "Buy Now"}
+          </button>
+
+          {!user ||
+            (!studentEnrolled?.includes(user?._id) && (
               <button
                 onClick={handleAddToCart}
                 className="bg-yellow-50 text-black w-fit p-2 rounded-md font-semibold"
               >
                 Add to Cart
               </button>
-            )}
-          </div>
-          <div>
-            <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
-              30-Day Money-Back Guarantee
-            </p>
-          </div>
+            ))}
+        </div>
+        <div>
+          <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
+            30-Day Money-Back Guarantee
+          </p>
+        </div>
 
-          <div className={``}>
-            <p className={`my-2 text-xl font-semibold `}>
-              This Course Includes :
-            </p>
-            <div className="flex flex-col gap-3 text-sm text-caribbeangreen-100">
-              {course?.courseDetails?.instructions?.map((item, i) => {
-                return (
-                  <p className={`flex gap-2`} key={i}>
-                    <BsFillCaretRightFill />
-                    <span>{item}</span>
-                  </p>
-                );
-              })}
-            </div>
-          </div>
-          <div className="text-center">
-            <button
-              className="mx-auto flex items-center gap-2 py-6 text-yellow-100 "
-              onClick={handleShare}
-            >
-              <FaShareSquare size={15} /> Share
-            </button>
+        <div>
+          <p className="my-2 text-xl font-semibold">This Course Includes :</p>
+          <div className="flex flex-col gap-3 text-sm text-caribbeangreen-100">
+            {course?.courseDetails?.instructions?.map((item, i) => (
+              <p className="flex gap-2" key={i}>
+                <BsFillCaretRightFill />
+                <span>{item}</span>
+              </p>
+            ))}
           </div>
         </div>
+        <div className="text-center">
+          <button
+            className="mx-auto flex items-center gap-2 py-6 text-yellow-100 "
+            onClick={handleShare}
+          >
+            <FaShareSquare size={15} /> Share
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -146,7 +146,7 @@ function CourseDetails() {
               />
             </div>
             <div
-              className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}
+              className={`z-10 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}
             >
               <div>
                 <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
@@ -180,10 +180,31 @@ function CourseDetails() {
               <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
-              <button className="yellowButton" onClick={handleBuyCourse}>
-                Buy Now
+              <button
+                className="yellowButton"
+                onClick={() => {
+                  if (user && studentsEnrolled?.includes(user?._id)) {
+                    navigate("/dashboard/enrolled-courses");
+                  } else {
+                    handleBuyCourse();
+                  }
+                }}
+              >
+                {user && studentsEnrolled?.includes(user?._id)
+                  ? "Go To Course"
+                  : "Buy Now"}
               </button>
-              <button className="blackButton">Add to Cart</button>
+
+              <button
+                className={`${
+                  user && studentsEnrolled?.includes(user?._id)
+                } ? "hidden" : "block"`}
+                onClick={handleBuyCourse}
+              >
+                {user && studentsEnrolled?.includes(user?._id)
+                  ? ""
+                  : "Add To Cart"}
+              </button>
             </div>
           </div>
           {/* Courses Card */}
@@ -276,196 +297,3 @@ function CourseDetails() {
 }
 
 export default CourseDetails;
-
-// import { useDispatch, useSelector } from "react-redux";
-// import { buyCourse } from "../services/operations/studentsFeaturesAPI";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { fetchCourseDetails } from "../services/operations/courseDetailsAPI";
-// import { useEffect, useState } from "react";
-// import GetAvgRating from "../utils/avgRating";
-// import Spinner from "../Components/Common/Spinner";
-// import Error from "../Pages/Error";
-// import ConfirmationModal from "../Components/Common/ConfirmationModal";
-// import RatingStars from "../Components/Common/RatingStars";
-// import { formattedDate } from "../utils/formattedDate";
-// import CourseDetailsCard from "../Components/Core/Course/CourseDetailsCard";
-
-// const CourseDetails = () => {
-//   const { token } = useSelector((state) => state.auth);
-//   const { user } = useSelector((state) => state.profile);
-//   const { loading } = useSelector((state) => state.profile);
-//   const { paymentLoading } = useSelector((state) => state.course);
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { courseId } = useParams();
-
-//   const [courseData, setCourseData] = useState(null);
-//   const [avgReviewCount, setAverageReviewCount] = useState(0);
-//   const [totalNoOfLectures, setTotalNoOfLectures] = useState(0);
-//   const [confirmationModal, setConfirmationModal] = useState(null);
-//   const [isActive, setIsActive] = useState(Array(0));
-
-//   const handleActive = (id) => {
-//     setIsActive(
-//       !isActive.includes(id)
-//         ? isActive.concat(id)
-//         : isActive.filter((e) => e != id)
-//     );
-//   };
-
-//   // For fetching particular course and showing it inside the page
-//   useEffect(() => {
-//     const getCourseDetails = async () => {
-//       try {
-//         const response = await fetchCourseDetails(courseId);
-//         console.log("Data received at couseDetails page : ", response);
-//         // console.log(
-//         //   "Data received at Student Enrolled  : ",
-//         //   response?.data?.courseDetails?.studentsEnrolled
-//         // );
-//         setCourseData(response);
-//       } catch (error) {
-//         console.log("Could Not Fetch The Course Data");
-//       }
-//     };
-//     getCourseDetails();
-//   }, [courseId]);
-
-//   // For Fetching the rating from the backend
-//   useEffect(() => {
-//     const count = GetAvgRating(courseData?.data?.ratingAndReviews);
-//     if (count) {
-//       setAverageReviewCount(count);
-//     } else {
-//       setAverageReviewCount(0);
-//     }
-//   }, [courseData]);
-
-//   // For fetching the total no of lectures
-//   useEffect(() => {
-//     let lectures = 0;
-//     courseData?.data?.courseDetails?.courseContent?.forEach((sec) => {
-//       lectures += sec.subSection.length || 0;
-//     });
-//     console.log("No of lectures are : ", lectures);
-//     setTotalNoOfLectures(lectures);
-//   }, [courseData]);
-
-//   // Handling the loader
-//   if (loading || !courseData) {
-//     return (
-//       <div>
-//         <Spinner />
-//       </div>
-//     );
-//   }
-
-//   // For handling if we face any error in the page
-//   if (!courseData.success) {
-//     return (
-//       <div>
-//         <Error />
-//       </div>
-//     );
-//   }
-
-//   const handleBuyCourse = () => {
-//     console.log(token);
-//     if (token) {
-//       buyCourse(token, [courseId], user, navigate, dispatch);
-//       return;
-//     }
-//     setConfirmationModal({
-//       text1: "You are not Logged In",
-//       text2: "Please login to purchase the course",
-//       btn1Text: "Login",
-//       btn2Text: "Cancel",
-//       btn1Handler: () => navigate("/login"),
-//       btn2Handler: () => setConfirmationModal(null),
-//     });
-//   };
-
-//   // const {
-//   //   _id: course_id,
-//   //   courseName,
-//   //   courseDescription,
-//   //   thumbnail,
-//   //   price,
-//   //   whatYouWillLearn,
-//   //   courseContent,
-//   //   ratingAndReviews,
-//   //   studentEnrolled,
-//   //   instructor,
-//   //   createdAt,
-//   // } = courseData?.data;
-
-//   const ratingAndReviews = courseData?.data?.courseDetails?.ratingAndReviews;
-//   const createdAt = formattedDate(courseData?.data?.courseDetails?.createdAt);
-
-//   return (
-//     <div className="flex flex-col text-white">
-//       <div className="relative flex justify-start flex-col p-10">
-//         <p>{courseData?.data?.courseDetails?.courseName}</p>
-//         <p>{courseData?.data?.courseDetails?.courseDescription}</p>
-//         <div className="flex flex-col">
-//           <span className="flex gap-2">
-//             {avgReviewCount}{" "}
-//             <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-//           </span>
-
-//           <span>{`${
-//             ratingAndReviews ? ratingAndReviews.length : 0
-//           } reviews`}</span>
-//           <span>
-//             {courseData?.data?.courseDetails?.studentsEnrolled?.length} students
-//             enrolled
-//           </span>
-//         </div>
-//         <div>
-//           <p>
-//             Created By {courseData?.data?.courseDetails?.instructor?.firstName}{" "}
-//             {courseData?.data?.instructor?.courseDetails?.lastName}
-//           </p>
-//         </div>
-//         <div>
-//           <p>Created at {createdAt} | English</p>
-//         </div>
-//         <div>
-//           <CourseDetailsCard
-//             course={courseData?.data}
-//             setConfirmationModal={setConfirmationModal}
-//             handleBuyCourse={handleBuyCourse}
-//           />
-//         </div>
-//       </div>
-//       <div>
-//         <p>What you will learn</p>
-//         <div>{courseData?.data?.courseDetails?.whatYouWillLearn}</div>
-//       </div>
-
-//       <div>
-//         <div>
-//           <p>Course Content</p>
-//         </div>
-//         <div className="flex gap-x-3 justify-between">
-//           <div>
-//             <span>
-//               {courseData?.data?.courseDetails?.courseContent?.length}{" "}
-//               section(s)
-//             </span>
-//             <span>{totalNoOfLectures} lecture(s)</span>
-//             <span>{courseData?.data?.totalDuration} total length</span>
-//           </div>
-//           <div>
-//             <button onClick={() => setIsActive([])}>
-//               Collapse all section
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//       {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
-//     </div>
-//   );
-// };
-
-// export default CourseDetails;

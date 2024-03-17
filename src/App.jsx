@@ -16,7 +16,6 @@ import Dashboard from "./Pages/Dashboard";
 import Error from "./Pages/Error";
 import Settings from "./Components/Core/Dashboard/Settings";
 import EnrolledCourses from "./Components/Core/Dashboard/EnrolledCourses";
-import Cart from "./Components/Core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import { useSelector } from "react-redux";
 import AddCourse from "./Components/Core/Dashboard/AddCourse";
@@ -28,6 +27,8 @@ import ViewCourse from "./Pages/ViewCourse";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
 import Instructor from "./Components/Core/Dashboard/InstructorDashboard/Instructor";
 import CategoryCatalog from "./Pages/CategoryCatalog";
+import MainCart from "./Components/Core/Dashboard/MainCart";
+import BookAppointmentForm from "./Pages/BookAppointment";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -63,6 +64,7 @@ function App() {
             </OpenRoute>
           }
         />
+
         <Route
           path="/update-password/:id"
           element={
@@ -93,7 +95,7 @@ function App() {
 
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <>
-              <Route path="dashboard/cart" element={<Cart />} />
+              <Route path="dashboard/cart" element={<MainCart />} />
               <Route
                 path="dashboard/enrolled-courses"
                 element={<EnrolledCourses />}
@@ -129,6 +131,15 @@ function App() {
             </>
           )}
         </Route>
+        <Route
+          path="/book-appointment/:id"
+          element={
+            <PrivateRoute>
+              <BookAppointmentForm />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

@@ -11,15 +11,22 @@ import {
   Chip,
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { IoMdContact, IoMdHome, IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import {
+  IoMdClose,
+  IoMdContact,
+  IoMdHome,
+  IoMdLogIn,
+  IoMdLogOut,
+} from "react-icons/io";
 import { GrCatalog } from "react-icons/gr";
-import { SiAboutdotme } from "react-icons/si";
+import { SiAboutdotme, SiCoursera } from "react-icons/si";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/operations/authAPI";
 import { FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import logo from "../../assets/Logo/Logo-Full-Dark.png";
+import { GoHubot } from "react-icons/go";
 
 export function SideDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -33,27 +40,14 @@ export function SideDrawer() {
       <Button onClick={openDrawer}>
         <FaBars size={24} />
       </Button>
-      <Drawer open={open} onClose={closeDrawer} className="text-black z-20">
+      <Drawer open={open} onClose={closeDrawer} className="text-black z-20 ">
         <div className="mb-2 flex items-center   justify-between p-4">
           <Typography variant="h5" color="blue-gray">
             <img src={logo} alt="Logo" className="w-[150px]" />
           </Typography>
-          <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </IconButton>
+          <button>
+            <IoMdClose onClick={closeDrawer} />
+          </button>
         </div>
         <List>
           <ListItem
@@ -84,6 +78,13 @@ export function SideDrawer() {
             <IoMdContact size={24} />
             <Link to={"/contact"}>Contact</Link>
           </ListItem>
+          <ListItem
+            className="flex gap-4 items-center"
+            onClick={() => setOpen(!open)}
+          >
+            <GoHubot size={24} />
+            <a href="https://pdf-reader-major.onrender.com/">Analyse PDF</a>
+          </ListItem>
           {user ? (
             <>
               <ListItem
@@ -91,7 +92,14 @@ export function SideDrawer() {
                 onClick={() => setOpen(!open)}
               >
                 <IoCartOutline size={24} />
-                <Link to={"/login"}>Cart</Link>
+                <Link to={"/dashboard/cart"}>Cart</Link>
+              </ListItem>
+              <ListItem
+                className="flex gap-4 items-center"
+                onClick={() => setOpen(!open)}
+              >
+                <SiCoursera size={24} />
+                <Link to={"/dashboard/enrolled-courses"}>Enrolled Courses</Link>
               </ListItem>
               <ListItem
                 className="flex gap-4 items-center"

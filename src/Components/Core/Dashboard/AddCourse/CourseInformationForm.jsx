@@ -156,7 +156,7 @@ const CourseInformationForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8"
+      className="rounded-md border-richblack-700 bg-richblack-800 text-white p-6 space-y-8"
     >
       <div>
         <label htmlFor="courseTitle" className="font-semibold text-md">
@@ -296,7 +296,7 @@ const CourseInformationForm = () => {
         {editCourse && (
           <button
             onClick={() => dispatch(setStep(2))}
-            className="flex items-center gap-x-2 bg-richblack-300"
+            className="flex items-center mb-2 p-2 text-black rounded-lg bg-yellow-50"
           >
             Continue Without saving
           </button>

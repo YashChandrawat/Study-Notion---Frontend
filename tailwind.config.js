@@ -3,8 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      inter: ["Inter", "sans-serif"],
-      "edu-sa": ["Edu SA Beginner", "cursive"],
+      // inter: ["Inter", "sans-serif"],
+      // "edu-sa": ["Edu SA Beginner", "cursive"],
       mono: ["Roboto Mono", "monospace"],
     },
     colors: {
@@ -122,6 +122,26 @@ module.exports = {
         700: "#2D2D2D",
         800: "#171717",
         900: "#141414",
+      },
+      customColor: {
+        5: "#4f4e4d",
+        10: "#3f5240",
+        20: "#1f3d35",
+        50: "#3e545c",
+        100: "#555461",
+        200: "#57636b",
+        300: "#576b66",
+        400: "#007bff",
+        500: "#00FFC2",
+        600: "#FFA500",
+        700: "#0000ee",
+      },
+      button: {
+        5: "#9AC4F8",
+        50: "#C4D4ED",
+        100: "#A4CBEF",
+        200: "#FF0000",
+        800: "#1C3E5F",
       },
     },
     extend: {
