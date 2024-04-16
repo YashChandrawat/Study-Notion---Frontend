@@ -10,31 +10,32 @@ const CategoryCatalog = () => {
     {
       name: "Android",
       image:
-        "https://img.freepik.com/free-vector/modern-android-icon_1035-9121.jpg?t=st=1710081972~exp=1710085572~hmac=ae22d4dc594fcce90cbe1211cb475fcf64724121f47ecb7410497aa261aeaabf&w=740",
+        "https://img.freepik.com/free-photo/young-handsome-physician-medical-robe-with-stethoscope_1303-17818.jpg?t=st=1710565988~exp=1710569588~hmac=a2c3355ea15f175778156dc65d3ea807402d7555ef958daf8578ef81e5d26c71&w=1060",
     },
     {
       name: "Web Dev",
       image:
-        "https://img.freepik.com/free-vector/ui-ux-designers-isometric-composition-with-small-people-creating-custom-design-web-site-3d-vector-illustration_1284-68939.jpg?t=st=1710082073~exp=1710085673~hmac=32724a15d00ff302acceafb62151b9e0c1bfd5a35599a93aa07c39569cda2cf1&w=826",
+        "https://yt3.googleusercontent.com/zvqp-zbY1gF-PlnaM70qLxc5JHEmgI7m3Zed7rNTJ2rKda1o9LudRJ4Zalc3rVjsxoTjq13aRw=s900-c-k-c0x00ffffff-no-rj",
     },
     {
       name: "Python",
       image:
-        "https://www.ntuclearninghub.com/documents/39367/4216797/Python-Symbol.png/369e410e-a90f-f887-c2dc-61f7ef761476/",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu44MNHCE6CvQWY9Om0IgwksWp2ftVSmqauzkfEWmtdw&s",
     },
     {
       name: "DSA",
-      image: "https://miro.medium.com/v2/resize:fit:1400/0*Rhu1FRkUGZFAeGIy",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhjoXPApwLSF4RU4bm5ZTDDT0u4Wyq0elS-aPE2pfQRw&s",
     },
     {
       name: "AIML",
       image:
-        "https://media.licdn.com/dms/image/D5612AQHjDGhc8cNfJA/article-cover_image-shrink_720_1280/0/1704439037481?e=2147483647&v=beta&t=wSs9ZAGGWfx_9TAfotJLRY87JtMQPhKo7wNAh1-inU0",
+        "https://i0.wp.com/junilearning.com/wp-content/uploads/2020/06/python-programming-language.webp?fit=1920%2C1920&ssl=1",
     },
     {
       name: "AIML",
       image:
-        "https://media.licdn.com/dms/image/D4D12AQHYC_ZczxV2zw/article-cover_image-shrink_720_1280/0/1695524296879?e=2147483647&v=beta&t=VJkWc3l89UdKGn2pEkDo4IWINkztx2V3u0tdzPL8ILA",
+        "https://media.geeksforgeeks.org/wp-content/uploads/20240213174747/dsa-new.webp",
     },
     {
       name: "AIML",
